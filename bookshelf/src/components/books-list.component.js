@@ -9,7 +9,7 @@ const Book = props => (
     <td>{props.book.author}</td>
     <td>{props.book.annotation}</td>
     <td>
-      <Link to={"/edit/"+props.book._id}>edit</Link> | <a href="#" onClick={() => { props.deleteBook(props.book._id) }}>delete</a>
+      <Link to={"/edit/"+props.book._id}>Edit</Link> | <a href="#" onClick={() => { props.deleteBook(props.book._id) }}>Delete</a>
     </td>
   </tr>
 )
@@ -21,10 +21,11 @@ export default class BooksList extends Component {
     this.deleteBook = this.deleteBook.bind(this)
 
     this.state = {
-        books: [],
-        
+        books: []
     };
   }
+
+  
 
   componentDidMount() {
     axios.get('http://localhost:5000/books/')
@@ -51,10 +52,42 @@ export default class BooksList extends Component {
     })
   }
 
+  
+  filterContent(books,searchTerm){
+      const result=books.filter((book)=>book.title.includes(searchTerm));
+      this.setState({books:result});
+  }
+
+  handleTextSearch =(e) =>{
+      const searchTerm=e.currentTarget.value;
+      axios.get('http://localhost:5000/books/').then((res) =>
+      {
+          if(res.data.success) {
+              this.filterContent(res.data.books,searchTerm)
+          }
+          
+      })
+     
+  }
+
   render() {
     return (
       <div>
-        <h3>Logged Books</h3>
+        <h3>All Books</h3>
+        <div className="row">
+            <div className="col-lg-9 mt-2 mb-2">
+                
+            </div>
+            <div className="col-lg-3 mt-2 mb-2">
+                <input
+                className="form-control"
+                type="search"
+                placeholder="Search"
+                name="searchTerm"
+                onChange={this.handleTextSearch}
+                ></input>
+            </div>
+        </div>
         <table className="table">
           <thead className="thead-light">
             <tr>

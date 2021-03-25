@@ -109,7 +109,7 @@ export default class CreateBooks extends Component {
         
 
         <div className="form-group">
-          <input type="submit" value="Create Book Log" className="btn btn-primary" />
+          <input type="submit" value="Add New Book" className="btn btn-primary" />
         </div>
       </form>
     </div>

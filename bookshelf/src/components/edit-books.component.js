@@ -82,7 +82,7 @@ export default class EditBooks extends Component {
   render() {
     return (
     <div>
-      <h3>Edit Books Log</h3>
+      <h3>Edit Book</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Title: </label>
@@ -123,7 +123,7 @@ export default class EditBooks extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Edit Book Log" className="btn btn-primary" />
+          <input type="submit" value="Edit Book" className="btn btn-primary" />
         </div>
       </form>
     </div>
